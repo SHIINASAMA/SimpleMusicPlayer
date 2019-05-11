@@ -339,34 +339,56 @@ namespace SimpleMusicPlayer
             if (index == -1)
                 return;
 
-            //如已经是最后一列，则转到第一列
-            if (index == this.MusicListBox.Items.Count - 1)
-                index = 0;
-            else
-                index += 1;
-
-            PlayingIndex = index;
-
-            if (!File.Exists(this.MusicListBox.Items[index].ToString()))
+            switch (Mode)
             {
-                if (index == this.MusicListBox.Items.Count - 1)
-                    index = 0;                
+                case PlayMode.ListLoop:
+                case PlayMode.OneLoop:
+                    //如已经是最后一列，则转到第一列
+                    if (index == this.MusicListBox.Items.Count - 1)
+                        index = 0;
+                    else
+                        index += 1;
 
-                MyMessageBox myMessageBox = new MyMessageBox("文件“" + this.MusicListBox.Items[index].ToString() + "”丢失，已帮您移除出列表。", "提示");
-                myMessageBox.ShowDialog();
-                this.MusicListBox.Items.RemoveAt(index);
+                    PlayingIndex = index;
+
+                    if (!File.Exists(this.MusicListBox.Items[index].ToString()))
+                    {
+                        if (index == this.MusicListBox.Items.Count - 1)
+                            index = 0;
+
+                        MyMessageBox myMessageBox = new MyMessageBox("文件“" + this.MusicListBox.Items[index].ToString() + "”丢失，已帮您移除出列表。", "提示");
+                        myMessageBox.ShowDialog();
+                        this.MusicListBox.Items.RemoveAt(index);
+                    }
+
+                    player.Init(this.MusicListBox.Items[index].ToString());
+                    LoadMusicInfo(this.MusicListBox.Items[index].ToString());
+                    player.Play();
+                    this.PlayingMusic = player.SongName;
+
+                    this.pictureBox3.Image = Properties.Resources.播放器_暂停_44;
+                    this.thumbnailToolBarButton2.Icon = Properties.Resources.Pause;
+                    this.thumbnailToolBarButton2.Tooltip = "暂停";
+
+                    this.MusicListBox.SelectedIndex = PlayingIndex;
+                    break;
+
+                case PlayMode.Random:
+                    int RandNum;
+                    while (true)
+                    {
+                        RandNum = new Random().Next(0, this.MusicListBox.Items.Count - 1);
+                        if (RandNum != PlayingIndex)
+                            break;
+                    }
+                    player.Init(this.MusicListBox.Items[RandNum].ToString());
+                    LoadMusicInfo(this.MusicListBox.Items[RandNum].ToString());
+                    player.Play();
+                    this.PlayingMusic = player.SongName;
+                    this.PlayingIndex = RandNum;
+                    this.MusicListBox.SelectedIndex = this.PlayingIndex;
+                    break;
             }
-
-            player.Init(this.MusicListBox.Items[index].ToString());
-            LoadMusicInfo(this.MusicListBox.Items[index].ToString());
-            player.Play();
-            this.PlayingMusic = player.SongName;
-
-            this.pictureBox3.Image = Properties.Resources.播放器_暂停_44;
-            this.thumbnailToolBarButton2.Icon = Properties.Resources.Pause;
-            this.thumbnailToolBarButton2.Tooltip = "暂停";
-
-            this.MusicListBox.SelectedIndex = PlayingIndex;
         }
 
         //删除歌曲按钮
@@ -615,11 +637,19 @@ namespace SimpleMusicPlayer
                                 {
                                     this.BeginInvoke(new MethodInvoker(() =>
                                     {
-                                        int RandNum = new Random().Next(0, this.MusicListBox.Items.Count - 1);
+                                        int RandNum;
+                                        while (true)
+                                        {
+                                            RandNum = new Random().Next(0, this.MusicListBox.Items.Count - 1);
+                                            if (RandNum != PlayingIndex)
+                                                break;
+                                        }
                                         player.Init(this.MusicListBox.Items[RandNum].ToString());
                                         LoadMusicInfo(this.MusicListBox.Items[RandNum].ToString());
                                         player.Play();
                                         this.PlayingMusic = player.SongName;
+                                        this.PlayingIndex = RandNum;
+                                        this.MusicListBox.SelectedIndex = this.PlayingIndex;
                                     }));
                                 }
                                 break;
@@ -664,6 +694,5 @@ namespace SimpleMusicPlayer
 
             }
         }
-
     }
 }
