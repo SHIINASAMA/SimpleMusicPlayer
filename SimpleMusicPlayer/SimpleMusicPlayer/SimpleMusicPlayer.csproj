@@ -63,13 +63,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSkin">
-      <HintPath>G:\我的下载\CSkin 16.1.14.3\CSkin 16.1.14.3\CSkin 4.0\CSkin.dll</HintPath>
+      <HintPath>F:\CSkin 16.1.14.3\CSkin 4.0\CSkin.dll</HintPath>
     </Reference>
     <Reference Include="Gdu.WinFormUI">
-      <HintPath>G:\我的下载\GduWinFormUI\Gmei.ControlDemo\bin\Debug\Gdu.WinFormUI.dll</HintPath>
+      <HintPath>F:\GduUI类库[2014.09.02]\GduWinFormUI\Gdu.WinFormUI\bin\Debug\Gdu.WinFormUI.dll</HintPath>
     </Reference>
     <Reference Include="Id3Lib">
-      <HintPath>G:\我的下载\id3lib\ID3Lib\bin\Release\Id3Lib.dll</HintPath>
+      <HintPath>..\..\..\Desktop\Temple\id3lib\Mp3Lib\bin\Debug\Id3Lib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -81,10 +81,10 @@
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Mp3Lib">
-      <HintPath>G:\我的下载\id3lib\Mp3Lib\bin\Release\Mp3Lib.dll</HintPath>
+      <HintPath>..\..\..\Desktop\Temple\id3lib\Mp3Lib\bin\Debug\Mp3Lib.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio">
-      <HintPath>G:\我的下载\NAudioPractice1\NAudioPractice1\bin\Debug\NAudio.dll</HintPath>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
